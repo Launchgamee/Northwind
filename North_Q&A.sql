@@ -273,7 +273,7 @@ and discontinued = 0
 --to see a list of all customers, sorted by region, alphabetically.
 --However, he wants the customers with no region (null in the Region field) to be at the end,
 --instead of at the top, where you’d normally find the null values. Within the same region,
---companies should be sorted by CustomerID.  select * from customers    select   CustomerID ,   Region   from customers    order by CustomerID  --25. High freight charges
+--companies should be sorted by CustomerID.  ------------------select * from customers  ------------------  select ------------------  CustomerID , ------------------  Region ------------------  from customers  ------------------  order by CustomerID  --25. High freight charges
 --Some of the countries we ship to have very high freight charges. We'd like to investigate
 --some more shipping options for our customers, to be able to offer them lower freight
 --charges. Return the three ship countries with the highest average freight overall, in
