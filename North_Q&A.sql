@@ -247,9 +247,91 @@ order by 2 desc
   order by country,city 
 
 
+--  22. Products that need reordering
+--What products do we have in our inventory that should be reordered? For now, just use the
+--fields UnitsInStock and ReorderLevel, where UnitsInStock is less than or equal to the
+--ReorderLevel, Ignore the fields UnitsOnOrder and Discontinued.
+--Sort the results by ProductID.selectproductid,productname,unitsinstock,reorderlevelfrom products where unitsinstock <= ReorderLevel  
+--23. Products that need reordering, continued
+--Now we need to incorporate these fields
+--—UnitsInStock, UnitsOnOrder, ReorderLevel,
+--Discontinued—into our calculation. 
+--We’ll define “products that need reordering” with the
+--following:
+--• UnitsInStock plus UnitsOnOrder are less than or equal to ReorderLevel
+--• The Discontinued flag is false (0).
+
+
+
+selectproductid,productname,unitsinstock,reorderlevelfrom products where unitsinstock + UnitsOnOrder  <= ReorderLevel 
+and discontinued = 0
+
+
+
+--24. Customer list by region
+--A salesperson for Northwind is going on a business trip to visit customers, and would like
+--to see a list of all customers, sorted by region, alphabetically.
+--However, he wants the customers with no region (null in the Region field) to be at the end,
+--instead of at the top, where you’d normally find the null values. Within the same region,
+--companies should be sorted by CustomerID.  select * from customers    select   CustomerID ,   Region   from customers    order by CustomerID  --25. High freight charges
+--Some of the countries we ship to have very high freight charges. We'd like to investigate
+--some more shipping options for our customers, to be able to offer them lower freight
+--charges. Return the three ship countries with the highest average freight overall, in
+--descending order by average freight.
 
 
 
 
 
+
+--26. High freight charges—2015
+--We're continuing on the question above on high freight charges. Now, instead of using all
+--the orders we have, we only want to see orders from the year 2015.
+  
+
+
+
+
+
+
+
+--27. High freight charges with between
+--Another (incorrect) answer to the problem above is this:
+--Select Top 3
+--39
+-- ShipCountry
+-- ,AverageFreight = avg(freight)
+--From Orders
+--Where
+-- OrderDate between '20150101' and '20151231'
+--Group By ShipCountry
+--Order By AverageFreight desc
+--Notice when you run this, it shows Sweden as the ShipCountry with the third highest
+--freight charges. However, this is wrong—it should be France.
+--What is the OrderID of the order that the (incorrect) answer above is missing?
+
+
+
+
+
+--28. High freight charges—last year
+--We're continuing to work on high freight charges. We now want to get the three ship
+--countries with the highest average freight charges. But instead of filtering for a particular
+--year, we want to use the last 12 months of order data, using as the end date the last
+--OrderDate in Orders. 
+ 
+
+
+
+
+-- 29. Employee/Order Detail report
+--We're doing inventory, and need to show Employee and Order Detail information like the
+--below, for all orders. Sort by OrderID and Product ID
+
+
+
+
+
+--30. Customers with no orders
+--There are some customers who have never actually placed an order. Show these customers.
 
