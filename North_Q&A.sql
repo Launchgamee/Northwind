@@ -111,9 +111,13 @@ order by BirthDate
 --BirthDate field.
 
 
-select FirstName,LastName,Title,CONVERT(DATE,BirthDate) 
-from Employees 
-order by CONVERT(DATE,BirthDate) 
+ select
+ FirstName,
+ LastName,
+ Title,
+ CONVERT(DATE,BirthDate) 
+ from Employees 
+ order by CONVERT(DATE,BirthDate) 
 
 
 
@@ -123,11 +127,11 @@ order by CONVERT(DATE,BirthDate)
 --new column called FullName, showing FirstName and LastName joined together in one
 --column, with a space in-between.
 
- SELECT 
- FIRSTNAME,
- LASTNAME,
- CONCAT(FIRSTNAME, ' ', LASTNAME) FULLNAME 
- FROM Employees 
+  SELECT 
+  FIRSTNAME,
+  LASTNAME,
+  CONCAT(FIRSTNAME, ' ', LASTNAME) FULLNAME 
+  FROM Employees 
 
 
 
@@ -177,11 +181,11 @@ select count(*) as [Count] from customers
 --This is similar in concept to the previous question �Countries where there are customers�,
 --except we now want a count for each ContactTitle.
 
-SELECT DISTINCT
- CONTACTTITLE,
- COUNT(*) AS CNT FROM CUSTOMERS
- GROUP BY ContactTitle 
- ORDER BY 2 DESC
+  SELECT DISTINCT
+  CONTACTTITLE,
+  COUNT(*) AS CNT FROM CUSTOMERS
+  GROUP BY ContactTitle 
+  ORDER BY 2 DESC
 
 
 
@@ -194,13 +198,13 @@ SELECT DISTINCT
 --this case, you will join the Suppliers table to the Product
 
 
-SELECT 
-PRODUCTID,
-PRODUCTNAME,
-COMPANYNAME
-FROM PRODUCTS P 
-JOIN SUPPLIERS S 
-ON P.SUPPLIERID = S.SUPPLIERID
+ SELECT 
+ PRODUCTID,
+ PRODUCTNAME,
+ COMPANYNAME
+ FROM PRODUCTS P 
+ JOIN SUPPLIERS S 
+ ON P.SUPPLIERID = S.SUPPLIERID
 
 
 --19. Orders and the Shipper that was used
@@ -282,7 +286,6 @@ where unitsinstock <= ReorderLevel
 --� The Discontinued flag is false (0).
 
 
-
 select
 productid,
 productname,
@@ -293,7 +296,6 @@ where unitsinstock + UnitsOnOrder  <= ReorderLevel
 and discontinued = 0
 
 
-
 --24. Customer list by region
 --A salesperson for Northwind is going on a business trip to visit customers, and would like
 --to see a list of all customers, sorted by region, alphabetically.
@@ -302,24 +304,42 @@ and discontinued = 0
 --companies should be sorted by CustomerID.
  
 
- select * from customers 
 
    select
    CustomerID ,
-   Region
+   region,
+   case when region is null then 1 else 0
+   end 
+   stat
    from customers 
-   order by CustomerID  
+   order by Region ,CustomerID  desc
+
+   select * from customers
 
 
 --25. High freight charges
 --Some of the countries we ship to have very high freight charges. We'd like to investigate
 --some more shipping options for our customers, to be able to offer them lower freight
---charges. Return the three ship countries with the highest average freight overall, in
+--charges
+--. Return the three ship countries with the highest average freight overall, in
 --descending order by average freight.
 
+  select * from orders
+  select * from orders order by freight desc
+  
+   select top 3 
+   shipcountry,
+   Freight 
+   from orders
+   --group by ShipCountry,freight
+   order by freight desc 
 
-
-
+   select top 3 
+   shipcountry, 
+   avg(Freight) AVGG
+   from orders
+   group by ShipCountry,freight 
+   order by freight desc
 
 
 
@@ -327,9 +347,6 @@ and discontinued = 0
 --We're continuing on the question above on high freight charges. Now, instead of using all
 --the orders we have, we only want to see orders from the year 2015.
   
-
-
-
 
 
 
@@ -367,10 +384,13 @@ and discontinued = 0
 --We're doing inventory, and need to show Employee and Order Detail information like the
 --below, for all orders. Sort by OrderID and Product ID
 
+select * from Employees
+select * from orders 
+select * from OrderDetails  
 
-
-
-
+ 
 --30. Customers with no orders
 --There are some customers who have never actually placed an order. Show these customers.
+
+select * from employees
 
